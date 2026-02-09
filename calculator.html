@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Event ROI Calculator — Bullish Events</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="calculator.css">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-logo">
+        <a href="index.html"><img src="logo.png" alt="Bullish Events" class="logo-img"></a>
+      </div>
+      <div class="nav-links">
+        <a href="https://www.bullishevents.com/andys-calendar" class="nav-link btn-outline">Book a Call</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="calc-page">
+    <div class="calc-container">
+      <div class="calc-header">
+        <h1>Event ROI Projections</h1>
+        <p>Calculate and optimize your event's return on investment</p>
+      </div>
+
+      <!-- Event Inputs -->
+      <div class="calc-section">
+        <div class="calc-section-header">
+          <span class="calc-section-icon">&#9881;</span>
+          <h2>Event Inputs</h2>
+        </div>
+        <div class="calc-section-body">
+
+          <!-- Budget -->
+          <div class="budget-area">
+            <div class="budget-top">
+              <h3>Event Budget</h3>
+              <button class="btn-add-item" id="addBudgetItem">+ Add Item</button>
+            </div>
+            <div class="budget-items" id="budgetItems">
+              <div class="budget-row">
+                <input type="text" class="budget-name" value="Venue" placeholder="Item name">
+                <div class="input-with-prefix">
+                  <span class="prefix">$</span>
+                  <input type="number" class="budget-cost" value="0" min="0">
+                </div>
+                <button class="btn-remove-item" title="Remove">&times;</button>
+              </div>
+            </div>
+            <div class="budget-total">
+              <span>Total Budget</span>
+              <span class="budget-total-value" id="totalBudget">$0</span>
+            </div>
+          </div>
+
+          <!-- Revenue Inputs -->
+          <div class="inputs-grid">
+            <div class="input-group">
+              <label>Average Ticket Price</label>
+              <div class="input-with-prefix">
+                <span class="prefix">$</span>
+                <input type="number" id="ticketPrice" value="100" min="0">
+              </div>
+            </div>
+            <div class="input-group">
+              <label>Number of Attendees</label>
+              <div class="input-with-prefix">
+                <span class="prefix icon">&#128101;</span>
+                <input type="number" id="numAttendees" value="500" min="0">
+              </div>
+            </div>
+            <div class="input-group">
+              <label>Offer Price</label>
+              <div class="input-with-prefix">
+                <span class="prefix">$</span>
+                <input type="number" id="offerPrice" value="299" min="0">
+              </div>
+            </div>
+            <div class="input-group">
+              <label>Conversion Rate (%)</label>
+              <div class="input-with-prefix">
+                <input type="number" id="conversionRate" value="5" min="0" max="100" step="0.1">
+              </div>
+            </div>
+            <div class="input-group">
+              <label>Sponsorship Revenue</label>
+              <div class="input-with-prefix">
+                <span class="prefix">$</span>
+                <input type="number" id="sponsorshipRevenue" value="5000" min="0">
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Revenue Projections -->
+      <div class="calc-section">
+        <div class="calc-section-header accent">
+          <span class="calc-section-icon">&#128200;</span>
+          <h2>Revenue Projections</h2>
+        </div>
+        <div class="calc-section-body">
+
+          <div class="projections-grid">
+            <div class="projection-card">
+              <span class="projection-label">Ticket Revenue</span>
+              <span class="projection-value" id="ticketRevenue">$0</span>
+              <span class="projection-sub" id="ticketRevenueSub">0 x $0</span>
+            </div>
+            <div class="projection-card">
+              <span class="projection-label">Buyers</span>
+              <span class="projection-value" id="buyers">0</span>
+              <span class="projection-sub" id="buyersSub">0 x 0%</span>
+            </div>
+            <div class="projection-card">
+              <span class="projection-label">Event Sales</span>
+              <span class="projection-value" id="eventSales">$0</span>
+              <span class="projection-sub" id="eventSalesSub">0 x $0</span>
+            </div>
+
+            <div class="projection-card">
+              <span class="projection-label">Sponsorship Revenue</span>
+              <span class="projection-value" id="projSponsor">$0</span>
+              <span class="projection-sub">Manually entered</span>
+            </div>
+            <div class="projection-card highlight">
+              <span class="projection-label">Gross Revenue</span>
+              <span class="projection-value accent-text" id="grossRevenue">$0</span>
+              <span class="projection-sub">Sum of all revenue streams</span>
+            </div>
+            <div class="projection-card">
+              <span class="projection-label">Net Revenue</span>
+              <span class="projection-value" id="netRevenue">$0</span>
+              <span class="projection-sub">Gross Revenue - Total Budget</span>
+            </div>
+          </div>
+
+          <div class="roi-card">
+            <span class="projection-label">ROI</span>
+            <span class="projection-value accent-text" id="roiPercent">0.0%</span>
+            <span class="roi-multiplier accent-text" id="roiMultiplier">0.00x</span>
+            <span class="projection-sub">Revenue &divide; Budget</span>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <img src="logo.png" alt="Bullish Events" class="logo-img footer-logo-img">
+      <p class="footer-copy">&copy; 2026 Bullish Events. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="calculator.js"></script>
+</body>
+</html>
